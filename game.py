@@ -1,48 +1,23 @@
 import pygame
 import random
 
+import global_def as gd
+import cards as c
+
 
 pygame.init()
 
-white = (255, 255, 255)
-black = (0, 0, 0)
-red = (255, 0, 0)
-display_width = 1500    
-display_height = 1000
+gd.display.fill(gd.white)
+c.A.draw_text_card()
+c.B.draw_text_card()
+c.C.draw_text_card()
+c.D.draw_text_card()
+c.Jaro.draw_text_card()
 
-display = pygame.display.set_mode((display_width, display_height))
-pygame.display.set_caption('Kartografove')
+c.random.choice(c.Rules_cards).draw_text_card()
 
 
-def message(msg, color, font_size, x, y):
-    display.blit(pygame.font.SysFont(None, font_size).render(msg, True, color), [x, y])
-
-class TextCard:
-    def __init__(self, text, color, font_size, pos_x, pos_y):
-        self.text = text
-        self.color = color
-        self.font_size = font_size
-        self.pos_x = pos_x
-        self.pos_y = pos_y 
-
-    def draw_text_card(self):
-        pygame.draw.rect(display, black, (self.pos_x, self.pos_y, 150, 200), 10)
-        message(self.text, self.color, self.font_size, self.pos_x+40, self.pos_y+60)
-
-Jaro = TextCard("Jaro: A+B", black,50,200,160)
-A = TextCard("A", red,120,200,400)
-B = TextCard("B", red,120,400,400)
-C = TextCard("C", red,120,600,400)
-D = TextCard("D", red,120,800,400)
-
-display.fill(white)
-A.draw_text_card()
-B.draw_text_card()
-C.draw_text_card()
-D.draw_text_card()
-Jaro.draw_text_card()
-
-message("Press n for next card", black, 40, 20, 50)
+c.message("Press n for next card", gd.black, 40, 20, 50)
 
 pygame.display.update()
 
