@@ -8,13 +8,13 @@ import cards as c
 pygame.init()
 
 gd.display.fill(gd.white)
-c.A.draw_text_card()
-c.B.draw_text_card()
-c.C.draw_text_card()
-c.D.draw_text_card()
-c.Jaro.draw_text_card()
 
-c.random.choice(c.Rules_cards).draw_text_card()
+coord = [200,400,600,800]
+for i in coord:
+    card = random.choice(c.Rules_cards)
+    card.draw_card(i, 700)
+    c.Rules_cards.remove(card)
+
 
 
 c.message("Press n for next card", gd.black, 40, 20, 50)
@@ -38,5 +38,4 @@ while True:
 
 
 
-# image = pygame.image.load(r'C:\Users\user\Pictures\geek.jpg')
-# display_surface.blit(image, (0, 0))
+

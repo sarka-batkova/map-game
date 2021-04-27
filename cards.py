@@ -7,39 +7,37 @@ import global_def as gd
 def message(msg, color, font_size, x, y):
     gd.display.blit(pygame.font.SysFont(None, font_size).render(msg, True, color), [x, y])
 
-class TextCard:
-    def __init__(self, text, color, font_size, pos_x, pos_y):
-        self.text = text
-        self.color = color
-        self.font_size = font_size
-        self.pos_x = pos_x
-        self.pos_y = pos_y 
+class Card:
+    def __init__(self, image, number):
+        self.image = image
+        self.number = number
 
-    def draw_text_card(self):
-        pygame.draw.rect(gd.display, gd.black, (self.pos_x, self.pos_y, 150, 200), 10)
-        message(self.text, self.color, self.font_size, self.pos_x+40, self.pos_y+60)
+    def draw_card(self, pos_x, pos_y):
+        card = self.image.convert_alpha()
+        card = pygame.transform.smoothscale(card, (200, 300)) # new image size
+        gd.display.blit(card, (pos_x, pos_y))
+        
 
-Jaro = TextCard("Jaro: A+B", gd.black, 50, 200, 160)
-A = TextCard("A", gd.red, 120, 200, 400)
-B = TextCard("B", gd.red, 120, 400, 400)
-C = TextCard("C", gd.red, 120, 600, 400)
-D = TextCard("D", gd.red, 120, 800, 400)
 
-Forrest_rules_cards = [TextCard("Spoj hory", gd.red, 50, 200, 700), 
-                        TextCard("okraj", gd.red, 50, 200, 700), 
-                        TextCard("obkruz", gd.red, 50, 200, 700)]
+Forrest_rules_cards = [Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\26.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\27.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\28.png'), 0),
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\29.png'), 0)]
 
-House_rules_cards = [TextCard("Vetsi nez 8", gd.red, 50, 400, 700), 
-                        TextCard("Nedotykat hory", gd.red, 50, 400, 700), 
-                        TextCard("Druhe nejvetsi", gd.red, 50, 400, 700)]
+House_rules_cards = [Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\34.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\35.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\36.png'), 0),
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\37.png'), 0)]
 
-Water_rules_cards = [TextCard("Dotek s polem", gd.red, 50, 400, 700), 
-                        TextCard("Dotek s horou", gd.red, 50, 400, 700), 
-                        TextCard("Nedotek s polem", gd.red, 50, 400, 700)]
+Water_rules_cards = [Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\30.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\31.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\32.png'), 0),
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\33.png'), 0)]
 
-Area_rules_cards = [TextCard("Nejvetsi ctverec", gd.red, 50, 400, 700), 
-                        TextCard("Radek nebo sloupec", gd.red, 50, 400, 700), 
-                        TextCard("Diagonala", gd.red, 50, 400, 700)]
+Area_rules_cards = [Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\38.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\39.png'), 0), 
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\40.png'), 0),
+                        Card(pygame.image.load(r'C:\Users\batkova\Downloads\karticky\karticky\41.png'), 0)]
 
 Rules_cards = [random.choice(Forrest_rules_cards), 
             random.choice(House_rules_cards), 
@@ -47,15 +45,7 @@ Rules_cards = [random.choice(Forrest_rules_cards),
             random.choice(Area_rules_cards)]
     
 
-class PlayingCard:
-  def __init__(self, text, shape, terrain, number):
-    # super().__init__(text)
-    self.text = text
-    self.shape = shape
-    self.terrain = terrain
-    self.number = number
 
-# class RulesCard:
 
 
 
