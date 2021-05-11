@@ -56,37 +56,37 @@ def Season(i):
 
 
 while True:
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and next_season_allowed:
-                    next_season_allowed = False
-                    i+=1
-                    cards.seasons[i].draw_card(3.45, 13)
+    event = pygame.event.wait()
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        quit()
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_SPACE and next_season_allowed:
+            next_season_allowed = False
+            i+=1
+            cards.seasons[i].draw_card(3.45, 13)
 
-                    playing_cards = cards.complete_playing_cards.copy()
-                    for b in range(i+1):
-                        if monster_cards[b] not in played_monster_cards: playing_cards.append(monster_cards[b]) 
-                    random.shuffle(playing_cards)
+            playing_cards = cards.complete_playing_cards.copy()
+            for b in range(i+1):
+                if monster_cards[b] not in played_monster_cards: playing_cards.append(monster_cards[b]) 
+            random.shuffle(playing_cards)
 
-                    sum = 0
-                    y = 3
-                    pygame.draw.rect(gd.display, gd.white, [gd.display_width/100*79.31, gd.display_height/100*3, gd.display_width, gd.display_height])
+            sum = 0
+            y = 3
+            pygame.draw.rect(gd.display, gd.white, [gd.display_width/100*79.31, gd.display_height/100*3, gd.display_width, gd.display_height])
 
-                if event.key == pygame.K_n and playing_cards and sum < cards.seasons[i].number:
-                    random_card = random.choice(playing_cards)
-                    random_card.draw_card(79.31, y)
-                    playing_cards.remove(random_card)
-                    if random_card in monster_cards:
-                        played_monster_cards.append(random_card)
-                    
-                    y += 7
-                    sum += random_card.number
-                    if sum >= cards.seasons[i].number:
-                        gd.message("Last card!", gd.black, 3, 83, 95)
-                        next_season_allowed = True
+        if event.key == pygame.K_n and playing_cards and sum < cards.seasons[i].number:
+            random_card = random.choice(playing_cards)
+            random_card.draw_card(79.31, y)
+            playing_cards.remove(random_card)
+            if random_card in monster_cards:
+                played_monster_cards.append(random_card)
+            
+            y += 7
+            sum += random_card.number
+            if sum >= cards.seasons[i].number:
+                gd.message("Last card!", gd.black, 3, 83, 95)
+                next_season_allowed = True
 
 
                 
