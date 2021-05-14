@@ -18,3 +18,9 @@ def message (msg, color, font_size, pos_x, pos_y):
     message = font_style.render(msg, True, color)
     display.blit(message, [round((display_width/100)*pos_x), round((display_height/100)*pos_y)])
 
+def rect (color, pos_x, pos_y, size_x, size_y, border = 0):
+    pygame.draw.rect(display, color, [round((display_width/100)*pos_x), round((display_height/100)*pos_y), round((display_height/100)*size_x), round((display_height/100)*size_y)], round((display_height/100)*border))
+
+def line (color, start_x, start_y, end_x, end_y, width):
+    pygame.draw.line(display, color, (round((display_width/100)*start_x), round((display_height/100)*start_y)), (round((display_width/100)*end_x), round((display_height/100)*end_y)), round((display_width/100)*width))
+

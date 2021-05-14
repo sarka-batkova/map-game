@@ -20,6 +20,8 @@ for i in coord:
     card.draw_card(i, 64)
     cards.rules_cards.remove(card)
 
+frame_coord = [3.3, 21.3, 39.2, 57.2, 3.3, 100]
+
 extension_cards = []
 for a in range(3):
     extension_card = random.choice(cards.extension_cards)
@@ -51,10 +53,6 @@ i = -1
 next_season_allowed = True
 
 
-def Season(i):
-    pass
-
-
 while True:
     event = pygame.event.wait()
     if event.type == pygame.QUIT:
@@ -73,8 +71,13 @@ while True:
 
             sum = 0
             y = 3
-            pygame.draw.rect(gd.display, gd.white, [gd.display_width/100*79.31, gd.display_height/100*3, gd.display_width, gd.display_height])
-
+            gd.rect(gd.white, 79, 0, gd.display_width, gd.display_height)
+            gd.rect(gd.black, frame_coord[i], 59, 25, 41, 0.5)
+            gd.rect(gd.black, frame_coord[i+1], 59, 25, 41, 0.5)
+            gd.rect(gd.white, frame_coord[i-1], 59, 25, 41, 0.5)
+            if i > 1:
+                gd.line(gd.black, frame_coord[i-1], 59, frame_coord[i-1]+17, 100, 1)
+                
         if event.key == pygame.K_n and playing_cards and sum < cards.seasons[i].number:
             random_card = random.choice(playing_cards)
             random_card.draw_card(79.31, y)
