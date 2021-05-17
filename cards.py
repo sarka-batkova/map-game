@@ -18,10 +18,16 @@ class Card:
         card = pygame.transform.smoothscale(card, (round(gd.display_height/2.8), round(gd.display_width/5.8))) 
         gd.display.blit(card, (round((gd.display_width/100)*pos_x), round((gd.display_height/100)*pos_y)))
 
-seasons = [Card('18', 8), 
-           Card('19', 8),
-           Card('20', 7),
-           Card('21', 6)]       
+class SeasonCard(Card):
+    def __init__(self, name, number, season1, season2): 
+        super().__init__(name, number)
+        self.s1 = season1
+        self.s2 = season2
+
+seasons = [SeasonCard('18', 8, "A", "B"), 
+           SeasonCard('19', 8, "B", "C"),
+           SeasonCard('20', 7, "C", "D"),
+           SeasonCard('21', 6, "D", "A")]       
 
 forrest_rules_cards = [Card('26'), 
                        Card('27'), 

@@ -9,18 +9,35 @@ pygame.init()
 
 gd.display.fill(gd.white)
 
+gd.message("Press spacebar for new season", gd.black, 2.5, 1.38, 5)
+gd.message("Press n for next card", gd.black, 2.5, 1.38, 8)
 gd.message("A", gd.red, 3, 11.03, 60)
 gd.message("B", gd.red, 3, 28.97, 60)
 gd.message("C", gd.red, 3, 46.90, 60)
 gd.message("D", gd.red, 3, 64.83, 60)
 
-coord = [3.44, 21.38, 39.31, 57.24]
-for i in coord:
+
+rules_coord = [3.44, 21.38, 39.31, 57.24]
+for i in rules_coord:
     card = random.choice(cards.rules_cards)
     card.draw_card(i, 64)
     cards.rules_cards.remove(card)
 
-frame_coord = [3.3, 21.3, 39.2, 57.2, 3.3, 100]
+frame_coord = {
+    "A" : 3.3,
+    "B" : 21.3,
+    "C" : 39.2,
+    "D" : 57.2
+}
+
+def draw_frames(season):
+    for i in frame_coord:
+        gd.rect(gd.white, frame_coord.get(i), 59, 25, 41, 0.5)
+    gd.rect(gd.black, frame_coord.get(cards.seasons[season].s1), 59, 25, 41, 0.5)
+    gd.rect(gd.black, frame_coord.get(cards.seasons[season].s2), 59, 25, 41, 0.5)
+    if season > 1:
+        gd.line(gd.black, frame_coord.get(cards.seasons[season-1].s1), 59, frame_coord.get(cards.seasons[season-1].s1)+17, 100, 1)
+
 
 extension_cards = []
 for a in range(3):
@@ -32,11 +49,6 @@ extension_cards[0].draw_extension_card(22.76, 9)
 extension_cards[1].draw_extension_card(47, 9)
 extension_cards[2].draw_extension_card(34.48, 33)
     
-
-
-gd.message("Press spacebar for new season", gd.black, 2.5, 1.38, 5)
-gd.message("Press n for next card", gd.black, 2.5, 1.38, 8)
-
 
 playing_cards = []
 
@@ -72,11 +84,9 @@ while True:
             sum = 0
             y = 3
             gd.rect(gd.white, 79, 0, gd.display_width, gd.display_height)
-            gd.rect(gd.black, frame_coord[i], 59, 25, 41, 0.5)
-            gd.rect(gd.black, frame_coord[i+1], 59, 25, 41, 0.5)
-            gd.rect(gd.white, frame_coord[i-1], 59, 25, 41, 0.5)
-            if i > 1:
-                gd.line(gd.black, frame_coord[i-1], 59, frame_coord[i-1]+17, 100, 1)
+            draw_frames(i)
+
+            
                 
         if event.key == pygame.K_n and playing_cards and sum < cards.seasons[i].number:
             random_card = random.choice(playing_cards)
