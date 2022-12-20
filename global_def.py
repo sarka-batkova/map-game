@@ -5,7 +5,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 red = (255, 0, 0)
 
-dimension = 1000
+dimension = 700
 
 display_width = round(1.45 * dimension)    
 display_height = round(dimension)
