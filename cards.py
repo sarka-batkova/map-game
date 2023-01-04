@@ -1,21 +1,52 @@
+"""Definition of playing cards. Exports lists of created plying cards.
+
+Classes:
+    Card: Class for creating cards.
+"""
+
 import pygame
 import random
-
 import global_def as gd
 
 class Card:
+    """A class for creating cards.
+
+    Attributes:
+        image (pygame.Surface): An image of the card.
+        number (int, optional): The card's value printed in its upper left corner (default is 0).
+
+    Methods:
+        draw_card(self, pos_x, pos_y, type = "reg"): Draws a card on the screen.
+    """
+
     def __init__(self, name, number = 0):
+        """        
+        Args:
+            name (str): File name of the card.
+            number (int, optional): The card's value printed in its upper left corner (default is 0).
+        """
         self.image = pygame.image.load(rf".\karticky\{name}.png")
         self.number = number
 
-    def draw_card(self, pos_x, pos_y): # all positions and sizes in percents
-        card = self.image.convert_alpha()
-        card = pygame.transform.smoothscale(card, (round(gd.display_width/5.8), round(gd.display_height/2.8))) # new image size
-        gd.display.blit(card, (round((gd.display_width/100)*pos_x), round((gd.display_height/100)*pos_y)))
+    def draw_card(self, pos_x, pos_y, type = "reg"): 
+        """Draws a card on the screen.
+    
+        Args:
+            pos_x (float): x position of upper left corner in percents of the game window.
+            pos_y (float): y position of upper left corner in percents of the the game window. 
+            type (str, optional): Type of card, regular or extention (default is "reg").
 
-    def draw_extension_card(self, pos_x, pos_y):
+        Raises:
+            ValueError: If type is neither "reg" nor "ext".
+        """
         card = self.image.convert_alpha()
-        card = pygame.transform.smoothscale(card, (round(gd.display_height/2.8), round(gd.display_width/5.8))) 
+        if type == "reg":
+            card = pygame.transform.smoothscale(card, (round(gd.display_width/5.8), round(gd.display_height/2.8))) # new image size
+        elif type == "ext":
+            card = pygame.transform.smoothscale(card, (round(gd.display_height/2.8), round(gd.display_width/5.8)))
+        else:
+            raise ValueError("Not a valid card type")
+        
         gd.display.blit(card, (round((gd.display_width/100)*pos_x), round((gd.display_height/100)*pos_y)))
 
 seasons = [Card('18', 8), 
@@ -80,7 +111,6 @@ extension_cards = [Card('S1'),
                  Card('S7'),
                  Card('S8')]
     
-
 
 
 
